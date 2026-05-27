@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eid Mubarak - From Sahil</title>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -23,7 +23,7 @@
     width: 100%; height: 100%;
     overflow-x: hidden;
     background: var(--midnight);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     color: var(--cream);
   }
 
@@ -61,7 +61,7 @@
 
   /* ── ARABIC HEADER ── */
   .arabic {
-    font-family: 'Amiri', serif;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
     font-size: clamp(2.4rem, 8vw, 4.2rem);
     color: var(--gold);
     text-align: center;
@@ -91,7 +91,7 @@
 
   /* ── SENDER BADGE ── */
   .sender-badge {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: clamp(0.9rem, 3vw, 1.15rem);
     color: var(--gold-light);
     letter-spacing: 0.22em;
@@ -125,7 +125,7 @@
   .card::after  { bottom: -30px; right: -30px; transform: rotate(15deg); }
 
   .to-name {
-    font-family: 'Amiri', serif;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
     font-size: clamp(1.6rem, 5vw, 2.4rem);
     color: var(--cream);
     margin-bottom: 8px;
@@ -150,7 +150,7 @@
   @keyframes underlineExpand { to { transform: scaleX(1); } }
 
   .main-title {
-    font-family: 'Amiri', serif;
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
     font-size: clamp(2.6rem, 9vw, 5rem);
     color: var(--gold);
     line-height: 1;
@@ -204,7 +204,7 @@
     border-radius: 3px;
     padding: 12px 18px;
     color: var(--cream);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.1rem;
     outline: none;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -219,7 +219,7 @@
     border: none; border-radius: 3px;
     padding: 12px 22px;
     color: var(--midnight);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -232,50 +232,7 @@
     box-shadow: 0 8px 24px rgba(212,175,55,0.35);
   }
 
-  /* ── COUNTDOWN ── */
-  .countdown-section {
-    max-width: 580px; width: 100%;
-    margin-top: 52px;
-    text-align: center;
-    animation: fadeSlideUp 2s ease both;
-  }
-  .countdown-title {
-    font-family: 'Amiri', serif;
-    font-size: 1.3rem;
-    color: var(--gold-light);
-    margin-bottom: 20px;
-    letter-spacing: 0.06em;
-  }
-  .countdown-grid {
-    display: grid; grid-template-columns: repeat(4,1fr); gap: 12px;
-  }
-  .cd-box {
-    background: rgba(10,92,97,0.25);
-    border: 1px solid rgba(212,175,55,0.22);
-    border-radius: 4px;
-    padding: 20px 8px 14px;
-    position: relative;
-    overflow: hidden;
-  }
-  .cd-box::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(212,175,55,0.04), transparent);
-  }
-  .cd-num {
-    font-family: 'Amiri', serif;
-    font-size: clamp(2rem, 6vw, 3rem);
-    color: var(--gold);
-    line-height: 1;
-    text-shadow: 0 0 20px rgba(212,175,55,0.5);
-  }
-  .cd-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(253,246,227,0.5);
-    margin-top: 6px;
-  }
+
 
   /* ── DECORATIVE LANTERNS ── */
   .lanterns {
@@ -334,7 +291,7 @@
     42%      { transform: scale(1.12); }
   }
   .footer-text {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1rem;
     color: rgba(212,175,55,0.55);
     margin-top: 8px;
@@ -427,16 +384,7 @@
     </div>
   </div>
 
-  <!-- Countdown -->
-  <div class="countdown-section">
-    <div class="countdown-title">☽ Days of Eid Celebration</div>
-    <div class="countdown-grid">
-      <div class="cd-box"><div class="cd-num" id="cd-days">03</div><div class="cd-label">Days</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
-    </div>
-  </div>
+
 
   <!-- Lanterns -->
   <div class="lanterns">
@@ -633,25 +581,7 @@
   requestAnimationFrame(loop);
 })();
 
-/* ── COUNTDOWN ── */
-(function(){
-  // Eid celebration for 3 days from today
-  const now = new Date();
-  const eidEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate()+3,23,59,59);
-  function update(){
-    const diff = eidEnd - new Date();
-    if(diff<=0){ document.getElementById('cd-days').textContent='00'; return; }
-    const d = Math.floor(diff/86400000);
-    const h = Math.floor((diff%86400000)/3600000);
-    const m = Math.floor((diff%3600000)/60000);
-    const s = Math.floor((diff%60000)/1000);
-    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
-    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
-  }
-  update(); setInterval(update,1000);
-})();
+
 
 /* ── NAME PERSONALIZATION ── */
 function setName(){
