@@ -1,43 +1,685 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eid Mubarak 1448</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Mubarak - From Sahil</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <link rel="stylesheet" href="style.css">
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #F5D76E;
+    --gold-deep: #A8860C;
+    --teal: #0A5C61;
+    --teal-light: #1A8C93;
+    --cream: #FDF6E3;
+    --midnight: #050D1A;
+    --rose: #C0392B;
+  }
 
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  html, body {
+    width: 100%; height: 100%;
+    overflow-x: hidden;
+    background: var(--midnight);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--cream);
+  }
+
+  /* ── STARS BACKGROUND ── */
+  #stars-canvas {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  }
+
+  /* ── FIREWORKS CANVAS ── */
+  #fw-canvas {
+    position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  }
+
+  /* ── MAIN WRAPPER ── */
+  .page {
+    position: relative; z-index: 3;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0 20px 80px;
+  }
+
+  /* ── MOON + CRESCENT ── */
+  .moon-scene {
+    margin-top: 48px;
+    position: relative;
+    width: 160px; height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    animation: floatMoon 6s ease-in-out infinite;
+  }
+  .moon-scene svg { filter: drop-shadow(0 0 32px #D4AF3799); }
+  @keyframes floatMoon {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-14px); }
+  }
+
+  /* ── ARABIC HEADER ── */
+  .arabic {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.4rem, 8vw, 4.2rem);
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-top: 24px;
+    text-shadow: 0 0 40px #D4AF3766;
+    animation: fadeSlideUp 1.2s ease both;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; gap: 14px;
+    margin: 18px 0;
+    animation: fadeSlideUp 1.4s ease both;
+  }
+  .divider-line {
+    width: clamp(60px, 15vw, 120px); height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .divider-diamond {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px var(--gold);
+  }
+
+  /* ── SENDER BADGE ── */
+  .sender-badge {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(0.9rem, 3vw, 1.15rem);
+    color: var(--gold-light);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    animation: fadeSlideUp 1.5s ease both;
+  }
+
+  /* ── MAIN GREETING CARD ── */
+  .card {
+    max-width: 660px; width: 100%;
+    background: linear-gradient(145deg, rgba(10,92,97,0.18), rgba(5,13,26,0.7));
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 6px;
+    padding: clamp(28px, 6vw, 56px) clamp(20px, 6vw, 52px);
+    text-align: center;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 80px rgba(212,175,55,0.1), inset 0 0 60px rgba(10,92,97,0.08);
+    position: relative;
+    overflow: hidden;
+    animation: fadeSlideUp 1.6s ease both;
+  }
+  .card::before, .card::after {
+    content: '';
+    position: absolute;
+    width: 120px; height: 120px;
+    border: 1px solid rgba(212,175,55,0.18);
+    border-radius: 2px;
+  }
+  .card::before { top: -30px; left: -30px; transform: rotate(15deg); }
+  .card::after  { bottom: -30px; right: -30px; transform: rotate(15deg); }
+
+  .to-name {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: var(--cream);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .to-name span {
+    color: var(--gold);
+    font-style: normal;
+    font-weight: 700;
+    display: inline-block;
+    position: relative;
+  }
+  .to-name span::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    animation: underlineExpand 0.8s 2.2s ease forwards;
+  }
+  @keyframes underlineExpand { to { transform: scaleX(1); } }
+
+  .main-title {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.6rem, 9vw, 5rem);
+    color: var(--gold);
+    line-height: 1;
+    text-shadow: 0 0 60px rgba(212,175,55,0.6);
+    margin: 8px 0 4px;
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%,100% { text-shadow: 0 0 40px rgba(212,175,55,0.5); }
+    50%      { text-shadow: 0 0 80px rgba(212,175,55,0.9), 0 0 120px rgba(212,175,55,0.3); }
+  }
+
+  .sub-title {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: var(--gold-light);
+    font-style: italic;
+    letter-spacing: 0.06em;
+  }
+
+  .message {
+    margin-top: 28px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    line-height: 1.85;
+    color: rgba(253,246,227,0.82);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* ── NAME INPUT ── */
+  .name-section {
+    max-width: 480px; width: 100%;
+    margin-top: 40px;
+    text-align: center;
+    animation: fadeSlideUp 1.8s ease both;
+  }
+  .name-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .name-row {
+    display: flex; gap: 10px; align-items: center;
+  }
+  .name-input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 3px;
+    padding: 12px 18px;
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .name-input::placeholder { color: rgba(212,175,55,0.35); }
+  .name-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(212,175,55,0.2);
+  }
+  .name-btn {
+    background: linear-gradient(135deg, var(--gold-deep), var(--gold));
+    border: none; border-radius: 3px;
+    padding: 12px 22px;
+    color: var(--midnight);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+  }
+  .name-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212,175,55,0.35);
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-section {
+    max-width: 580px; width: 100%;
+    margin-top: 52px;
+    text-align: center;
+    animation: fadeSlideUp 2s ease both;
+  }
+  .countdown-title {
+    font-family: 'Amiri', serif;
+    font-size: 1.3rem;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    letter-spacing: 0.06em;
+  }
+  .countdown-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 12px;
+  }
+  .cd-box {
+    background: rgba(10,92,97,0.25);
+    border: 1px solid rgba(212,175,55,0.22);
+    border-radius: 4px;
+    padding: 20px 8px 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cd-box::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(212,175,55,0.04), transparent);
+  }
+  .cd-num {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--gold);
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(212,175,55,0.5);
+  }
+  .cd-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(253,246,227,0.5);
+    margin-top: 6px;
+  }
+
+  /* ── DECORATIVE LANTERNS ── */
+  .lanterns {
+    display: flex; gap: clamp(30px, 8vw, 80px);
+    margin-top: 60px;
+    animation: fadeSlideUp 2.2s ease both;
+  }
+  .lantern {
+    display: flex; flex-direction: column; align-items: center;
+    animation: swingLantern 4s ease-in-out infinite;
+  }
+  .lantern:nth-child(2) { animation-delay: -1.3s; }
+  .lantern:nth-child(3) { animation-delay: -2.6s; }
+  @keyframes swingLantern {
+    0%,100% { transform: rotate(-6deg); }
+    50%      { transform: rotate(6deg); }
+  }
+  .lantern svg { filter: drop-shadow(0 0 14px rgba(212,175,55,0.6)); }
+
+  /* ── PATTERN BAND ── */
+  .pattern-band {
+    width: 100%; max-width: 660px;
+    height: 28px;
+    margin-top: 50px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(212,175,55,0.25) 0px, rgba(212,175,55,0.25) 1px,
+      transparent 1px, transparent 18px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(212,175,55,0.15) 0px, rgba(212,175,55,0.15) 1px,
+      transparent 1px, transparent 18px
+    );
+    border-top: 1px solid rgba(212,175,55,0.3);
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+    animation: fadeSlideUp 2.4s ease both;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 50px;
+    text-align: center;
+    animation: fadeSlideUp 2.6s ease both;
+  }
+  .footer-heart {
+    font-size: 1.4rem;
+    color: var(--gold);
+    display: inline-block;
+    animation: heartbeat 1.4s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14%      { transform: scale(1.18); }
+    28%      { transform: scale(1); }
+    42%      { transform: scale(1.12); }
+  }
+  .footer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: rgba(212,175,55,0.55);
+    margin-top: 8px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── UTILITY ── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Sparkle particles */
+  .sparkle {
+    position: fixed; pointer-events: none; z-index: 1;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 6px var(--gold);
+    animation: sparkleFade 2.5s ease-in-out forwards;
+  }
+  @keyframes sparkleFade {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-80px) scale(0); }
+  }
+</style>
 </head>
 <body>
 
-<div class="stars"></div>
+<canvas id="stars-canvas"></canvas>
+<canvas id="fw-canvas"></canvas>
 
-<div class="container">
+<div class="page">
 
-  <h1>🌙 Eid Mubarak 1448 AH</h1>
+  <!-- Moon -->
+  <div class="moon-scene">
+    <svg width="140" height="140" viewBox="0 0 140 140">
+      <defs>
+        <radialGradient id="moonGrad" cx="40%" cy="40%">
+          <stop offset="0%" stop-color="#F5D76E"/>
+          <stop offset="100%" stop-color="#A8860C"/>
+        </radialGradient>
+      </defs>
+      <!-- Glowing halo -->
+      <circle cx="70" cy="70" r="65" fill="rgba(212,175,55,0.06)"/>
+      <circle cx="70" cy="70" r="52" fill="rgba(212,175,55,0.1)"/>
+      <!-- Moon crescent -->
+      <path d="M70,20 A50,50 0 1,1 70,120 A36,36 0 1,0 70,20 Z" fill="url(#moonGrad)"/>
+      <!-- Star near moon -->
+      <polygon points="112,38 115,48 125,48 117,54 120,64 112,58 104,64 107,54 99,48 109,48"
+               fill="#F5D76E" opacity="0.95"/>
+    </svg>
+  </div>
 
-  <input type="text" id="nameInput" placeholder="Enter Your Name">
+  <!-- Arabic Greeting -->
+  <div class="arabic">عيد مبارك</div>
 
-  <button onclick="generateGreeting()">
-    Generate Greeting
-  </button>
+  <!-- Divider -->
+  <div class="divider">
+    <div class="divider-line"></div>
+    <div class="divider-diamond"></div>
+    <div class="divider-line"></div>
+  </div>
 
-  <div id="greetingBox" class="hidden">
+  <!-- Sender -->
+  <div class="sender-badge">✦ Sahil wishes you ✦</div>
 
-    <h2 id="greetingText"></h2>
+  <!-- Main Card -->
+  <div class="card" id="main-card">
+    <div class="to-name">Dear <span id="display-name">Friend</span>,</div>
+    <div class="main-title">Eid Mubarak</div>
+    <div class="sub-title">عيد سعيد</div>
+    <div class="divider" style="justify-content:center; margin: 16px 0;">
+      <div class="divider-line" style="width:60px"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line" style="width:60px"></div>
+    </div>
+    <p class="message">
+      May the blessings of Eid fill your heart with joy and your home with laughter.<br>
+      Wishing you and your loved ones endless happiness, peace, and prosperity.<br><br>
+      تقبل الله منا ومنكم — May Allah accept from us and from you.
+    </p>
+  </div>
 
-    <p id="duaText"></p>
+  <!-- Name Input -->
+  <div class="name-section">
+    <label class="name-label" for="nameInput">Personalize your greeting</label>
+    <div class="name-row">
+      <input class="name-input" id="nameInput" type="text" placeholder="Enter recipient's name…" maxlength="40"/>
+      <button class="name-btn" onclick="setName()">✦ Wish</button>
+    </div>
+  </div>
 
-    <button onclick="shareGreeting()">
-      Share Greeting
-    </button>
+  <!-- Countdown -->
+  <div class="countdown-section">
+    <div class="countdown-title">☽ Days of Eid Celebration</div>
+    <div class="countdown-grid">
+      <div class="cd-box"><div class="cd-num" id="cd-days">03</div><div class="cd-label">Days</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-label">Hours</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-label">Minutes</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-secs">00</div><div class="cd-label">Seconds</div></div>
+    </div>
+  </div>
 
+  <!-- Lanterns -->
+  <div class="lanterns">
+    <!-- Lantern 1 -->
+    <div class="lantern">
+      <svg width="44" height="70" viewBox="0 0 44 70">
+        <line x1="22" y1="0" x2="22" y2="10" stroke="#D4AF37" stroke-width="1.5"/>
+        <ellipse cx="22" cy="12" rx="8" ry="3" fill="#D4AF37"/>
+        <path d="M10,14 Q6,35 10,55 Q16,62 22,63 Q28,62 34,55 Q38,35 34,14 Z" fill="rgba(212,175,55,0.18)" stroke="#D4AF37" stroke-width="1"/>
+        <path d="M14,18 Q22,14 30,18" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.8"/>
+        <path d="M12,30 Q22,26 32,30" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.8"/>
+        <path d="M12,42 Q22,38 32,42" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.8"/>
+        <ellipse cx="22" cy="55" rx="8" ry="3" fill="#D4AF37"/>
+        <circle cx="22" cy="38" r="5" fill="rgba(255,200,50,0.35)"/>
+        <circle cx="22" cy="38" r="2.5" fill="rgba(255,200,50,0.7)"/>
+        <line x1="22" y1="63" x2="22" y2="70" stroke="#D4AF37" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <!-- Lantern 2 (teal) -->
+    <div class="lantern" style="animation-delay:-0.7s">
+      <svg width="54" height="84" viewBox="0 0 54 84">
+        <line x1="27" y1="0" x2="27" y2="12" stroke="#1A8C93" stroke-width="1.5"/>
+        <ellipse cx="27" cy="14" rx="10" ry="4" fill="#1A8C93"/>
+        <path d="M12,16 Q8,42 12,65 Q18,74 27,76 Q36,74 42,65 Q46,42 42,16 Z" fill="rgba(26,140,147,0.18)" stroke="#1A8C93" stroke-width="1.2"/>
+        <path d="M16,22 Q27,17 38,22" fill="none" stroke="rgba(26,140,147,0.5)" stroke-width="0.8"/>
+        <path d="M14,38 Q27,33 40,38" fill="none" stroke="rgba(26,140,147,0.5)" stroke-width="0.8"/>
+        <path d="M14,54 Q27,49 40,54" fill="none" stroke="rgba(26,140,147,0.5)" stroke-width="0.8"/>
+        <ellipse cx="27" cy="66" rx="10" ry="4" fill="#1A8C93"/>
+        <circle cx="27" cy="46" r="7" fill="rgba(26,200,200,0.3)"/>
+        <circle cx="27" cy="46" r="3.5" fill="rgba(26,220,220,0.65)"/>
+        <line x1="27" y1="76" x2="27" y2="84" stroke="#1A8C93" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <!-- Lantern 3 -->
+    <div class="lantern" style="animation-delay:-2s">
+      <svg width="44" height="70" viewBox="0 0 44 70">
+        <line x1="22" y1="0" x2="22" y2="10" stroke="#D4AF37" stroke-width="1.5"/>
+        <ellipse cx="22" cy="12" rx="8" ry="3" fill="#D4AF37"/>
+        <path d="M10,14 Q6,35 10,55 Q16,62 22,63 Q28,62 34,55 Q38,35 34,14 Z" fill="rgba(212,175,55,0.18)" stroke="#D4AF37" stroke-width="1"/>
+        <path d="M14,18 Q22,14 30,18" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.8"/>
+        <path d="M12,30 Q22,26 32,30" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.8"/>
+        <path d="M12,42 Q22,38 32,42" fill="none" stroke="rgba(212,175,55,0.5)" stroke-width="0.8"/>
+        <ellipse cx="22" cy="55" rx="8" ry="3" fill="#D4AF37"/>
+        <circle cx="22" cy="38" r="5" fill="rgba(255,200,50,0.35)"/>
+        <circle cx="22" cy="38" r="2.5" fill="rgba(255,200,50,0.7)"/>
+        <line x1="22" y1="63" x2="22" y2="70" stroke="#D4AF37" stroke-width="1.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Pattern Band -->
+  <div class="pattern-band"></div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-heart">♥</div>
+    <div class="footer-text">With love & blessings — Sahil</div>
   </div>
 
 </div>
 
-<script src="script.js"></script>
+<script>
+/* ── STAR FIELD ── */
+(function(){
+  const c = document.getElementById('stars-canvas');
+  const ctx = c.getContext('2d');
+  let W, H, stars = [];
+  function resize(){ W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  for(let i=0;i<220;i++){
+    stars.push({ x:Math.random(), y:Math.random(), r:Math.random()*1.4+0.3, a:Math.random(), da:(Math.random()-0.5)*0.008 });
+  }
+  function drawStars(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a = Math.max(0.1, Math.min(1, s.a + s.da));
+      if(s.a<=0.1||s.a>=1) s.da*=-1;
+      ctx.beginPath();
+      ctx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(245,215,110,${s.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+  drawStars();
+})();
 
+/* ── FIREWORKS ── */
+(function(){
+  const c = document.getElementById('fw-canvas');
+  const ctx = c.getContext('2d');
+  let W, H;
+  function resize(){ W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COLORS = ['#D4AF37','#F5D76E','#1A8C93','#E74C3C','#E8D5A3','#7FB3D3','#F39C12','#FFFFFF'];
+  let rockets = [], particles = [];
+
+  class Rocket {
+    constructor(){
+      this.x = W * (0.2 + Math.random()*0.6);
+      this.y = H;
+      this.tx = W * (0.1 + Math.random()*0.8);
+      this.ty = H * (0.1 + Math.random()*0.45);
+      this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+      this.done = false;
+      this.trail = [];
+    }
+    update(){
+      this.trail.push({x:this.x, y:this.y});
+      if(this.trail.length>12) this.trail.shift();
+      const dx = this.tx-this.x, dy = this.ty-this.y;
+      const d = Math.sqrt(dx*dx+dy*dy);
+      if(d < 6){ this.explode(); this.done=true; return; }
+      const spd = Math.min(d, 14);
+      this.x += (dx/d)*spd;
+      this.y += (dy/d)*spd;
+    }
+    explode(){
+      const n = 80 + Math.floor(Math.random()*60);
+      for(let i=0;i<n;i++){
+        const angle = (Math.PI*2/n)*i + Math.random()*0.2;
+        const spd = 1.5 + Math.random()*5;
+        particles.push(new Particle(this.x, this.y,
+          Math.cos(angle)*spd, Math.sin(angle)*spd,
+          this.color));
+      }
+      // Gold ring burst
+      if(Math.random()<0.4){
+        for(let i=0;i<40;i++){
+          const angle = (Math.PI*2/40)*i;
+          particles.push(new Particle(this.x, this.y,
+            Math.cos(angle)*3.5, Math.sin(angle)*3.5, '#D4AF37', true));
+        }
+      }
+    }
+    draw(){
+      ctx.beginPath();
+      this.trail.forEach((p,i)=>{
+        ctx.strokeStyle = `rgba(245,215,110,${i/this.trail.length*0.7})`;
+        ctx.lineWidth = 1.5;
+        if(i===0) ctx.moveTo(p.x,p.y); else ctx.lineTo(p.x,p.y);
+      });
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, 3, 0, Math.PI*2);
+      ctx.fillStyle = '#FFF';
+      ctx.fill();
+    }
+  }
+
+  class Particle {
+    constructor(x,y,vx,vy,color,ring=false){
+      this.x=x; this.y=y; this.vx=vx; this.vy=vy;
+      this.color=color; this.ring=ring;
+      this.life=1; this.decay=0.012+Math.random()*0.018;
+      this.r = ring ? 1.2 : 2+Math.random()*2;
+      this.gravity = ring ? 0.04 : 0.08;
+    }
+    update(){
+      this.x+=this.vx; this.y+=this.vy;
+      this.vy+=this.gravity;
+      this.vx*=0.97; this.vy*=0.97;
+      this.life-=this.decay;
+    }
+    draw(){
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+      ctx.fillStyle = this.color + Math.floor(this.life*255).toString(16).padStart(2,'0');
+      ctx.fill();
+      // Sparkle glow
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r*2.5, 0, Math.PI*2);
+      ctx.fillStyle = this.color + Math.floor(this.life*60).toString(16).padStart(2,'0');
+      ctx.fill();
+    }
+  }
+
+  let lastLaunch = 0;
+  function loop(ts){
+    ctx.clearRect(0,0,W,H);
+    if(ts - lastLaunch > 900 + Math.random()*600){
+      rockets.push(new Rocket());
+      lastLaunch = ts;
+    }
+    rockets = rockets.filter(r=>!r.done);
+    rockets.forEach(r=>{ r.update(); r.draw(); });
+    particles = particles.filter(p=>p.life>0);
+    particles.forEach(p=>{ p.update(); p.draw(); });
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+/* ── COUNTDOWN ── */
+(function(){
+  // Eid celebration for 3 days from today
+  const now = new Date();
+  const eidEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate()+3,23,59,59);
+  function update(){
+    const diff = eidEnd - new Date();
+    if(diff<=0){ document.getElementById('cd-days').textContent='00'; return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+  update(); setInterval(update,1000);
+})();
+
+/* ── NAME PERSONALIZATION ── */
+function setName(){
+  const input = document.getElementById('nameInput');
+  const val = input.value.trim();
+  const el = document.getElementById('display-name');
+  if(val){ el.textContent = val; }
+  input.value = '';
+  launchConfetti();
+}
+document.getElementById('nameInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter') setName();
+});
+
+/* ── MINI CONFETTI on wish ── */
+function launchConfetti(){
+  for(let i=0;i<18;i++){
+    const s = document.createElement('div');
+    s.className='sparkle';
+    s.style.left = (20+Math.random()*60)+'vw';
+    s.style.top  = (30+Math.random()*40)+'vh';
+    s.style.background = ['#D4AF37','#1A8C93','#E74C3C','#F5D76E'][Math.floor(Math.random()*4)];
+    s.style.animationDelay = Math.random()*0.6+'s';
+    s.style.width = s.style.height = (3+Math.random()*5)+'px';
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(), 3000);
+  }
+}
+</script>
 </body>
-      </html>
+</html>
